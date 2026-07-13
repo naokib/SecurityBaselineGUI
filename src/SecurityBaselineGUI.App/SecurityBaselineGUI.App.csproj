@@ -1,0 +1,28 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net9.0-windows</TargetFramework>
+    <UseWPF>true</UseWPF>
+    <RootNamespace>SecurityBaselineGUI.App</RootNamespace>
+    <ApplicationIcon />
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="CommunityToolkit.Mvvm" Version="8.4.0" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="9.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\SecurityBaselineGUI.Core\SecurityBaselineGUI.Core.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <!-- 仕様書3章: ps1は外部ファイルとして持ち、更新はファイル差し替えで完結させる。
+         正本はリポジトリ内の Scripts フォルダに置き、ビルド出力へコピーする。 -->
+    <None Include="..\..\Scripts\Configure-SecurityBaseline.ps1" Link="Scripts\Configure-SecurityBaseline.ps1">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+</Project>

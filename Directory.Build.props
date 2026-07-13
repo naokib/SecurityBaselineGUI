@@ -1,0 +1,13 @@
+<Project>
+  <PropertyGroup>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <LangVersion>latest</LangVersion>
+    <Company>Internal</Company>
+    <Product>SecurityBaselineGUI</Product>
+    <!--
+      TODO: .NET 10 SDK が整備され次第 net10.0 系TFMへ切り替える(仕様書3章)。
+      この環境には .NET 9 SDK のみ導入されているため、試作段階は net9.0 系で実装する。
+    -->
+  </PropertyGroup>
+</Project>
