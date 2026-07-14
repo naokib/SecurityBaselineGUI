@@ -1,0 +1,41 @@
+<Window x:Class="SecurityBaselineGUI.App.Views.CsvColumnCustomizeWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:vm="clr-namespace:SecurityBaselineGUI.App.ViewModels"
+        Title="CSV出力列のカスタマイズ"
+        Height="420" Width="380"
+        WindowStartupLocation="CenterOwner"
+        d:DataContext="{d:DesignInstance vm:CsvColumnCustomizeViewModel}"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d">
+    <Grid Margin="12">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <DockPanel Grid.Row="0">
+            <StackPanel DockPanel.Dock="Right" Margin="8,0,0,0">
+                <Button Content="上へ" Width="60" Margin="0,0,0,4" Command="{Binding MoveUpCommand}"/>
+                <Button Content="下へ" Width="60" Command="{Binding MoveDownCommand}"/>
+            </StackPanel>
+            <ListBox ItemsSource="{Binding Columns}" SelectedItem="{Binding SelectedColumn}">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <CheckBox Content="{Binding DisplayName}" IsChecked="{Binding IsVisible}"/>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+        </DockPanel>
+
+        <TextBlock Grid.Row="1" Margin="0,8,0,0" TextWrapping="Wrap" Foreground="Gray"
+                   Text="チェックした列だけがCSVに出力されます。一覧の並び順がそのまま出力列の順序になります。"/>
+
+        <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,8,0,0">
+            <Button Content="OK" Width="80" Margin="0,0,8,0" Click="OkButton_Click" IsDefault="True"/>
+            <Button Content="キャンセル" Width="80" IsCancel="True"/>
+        </StackPanel>
+    </Grid>
+</Window>
