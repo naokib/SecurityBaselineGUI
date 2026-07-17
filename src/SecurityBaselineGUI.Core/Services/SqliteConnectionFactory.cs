@@ -96,6 +96,27 @@ public sealed class SqliteConnectionFactory
                 DisplayOrder INTEGER NOT NULL,
                 Visible INTEGER NOT NULL
             );
+
+            CREATE TABLE IF NOT EXISTS OperationJournal (
+                Id INTEGER PRIMARY KEY AUTOINCREMENT,
+                OperationId TEXT NOT NULL,
+                ProductId TEXT NOT NULL,
+                OperationName TEXT NOT NULL,
+                Stage TEXT NOT NULL,
+                ConsistencyState TEXT NOT NULL,
+                ExternalDependency TEXT NOT NULL,
+                CorrelationKey TEXT NOT NULL,
+                Message TEXT NOT NULL,
+                OccurredAt TEXT NOT NULL,
+                RecoveryRequired INTEGER NOT NULL,
+                RepairPlan TEXT NOT NULL
+            );
+
+            CREATE INDEX IF NOT EXISTS IX_OperationJournal_OperationId
+                ON OperationJournal(OperationId);
+
+            CREATE INDEX IF NOT EXISTS IX_OperationJournal_RecoveryRequired
+                ON OperationJournal(RecoveryRequired, OccurredAt DESC);
             """;
         command.ExecuteNonQuery();
     }
